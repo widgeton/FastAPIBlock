@@ -21,3 +21,11 @@ class TradingResults(Base):
     date: Mapped[date]
     created_on: Mapped[crated_dt]
     updated_on: Mapped[updated_dt]
+
+    def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            return False
+        for attr in ('id', 'exchange_product_id', 'date'):
+            if getattr(self, attr) != getattr(other, attr):
+                return False
+        return True
